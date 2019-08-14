@@ -163,6 +163,20 @@ class Iways_PayPalPlus_Model_Payment extends Mage_Payment_Model_Method_Abstract
     }
 
     /**
+     * Attempt to deny a payment that us under review
+     *
+     * @param Mage_Payment_Model_Info $payment
+     * @return bool
+     * @throws Mage_Core_Exception
+     */
+    public function denyPayment(Mage_Payment_Model_Info $payment)
+    {
+        $payment->setStatus(self::STATUS_DECLINED);
+        $payment->save();
+        return true;
+    }
+
+    /**
      * Parent transaction id getter
      *
      * @param Varien_Object $payment
