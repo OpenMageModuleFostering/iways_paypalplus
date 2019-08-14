@@ -113,7 +113,9 @@ class Iways_PayPalPlus_IndexController extends Mage_Checkout_Controller_Action
                 $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($response));
                 return;
             }
-
+            if ($this->getRequest()->getParam('pppId')) {
+                Mage::getSingleton('customer/session')->setPayPalPaymentId($this->getRequest()->getParam('pppId'));
+            }
             $billing = $this->getRequest()->getPost('billing', array());
             $customerBillingAddressId = $this->getRequest()->getPost('billing_address_id', false);
 
@@ -154,8 +156,7 @@ class Iways_PayPalPlus_IndexController extends Mage_Checkout_Controller_Action
     /**
      * Listener for PayPal REST Webhooks
      */
-    public
-    function webhooksAction()
+    public function webhooksAction()
     {
         if (!$this->getRequest()->isPost()) {
             return;
@@ -164,7 +165,7 @@ class Iways_PayPalPlus_IndexController extends Mage_Checkout_Controller_Action
             /** @var \PayPal\Api\WebhookEvent $webhookEvent */
             $webhookEvent =
                 Mage::getSingleton('iways_paypalplus/api')->validateWebhook($this->getRequest()->getRawBody());
-            if(!$webhookEvent) {
+            if (!$webhookEvent) {
                 Mage::throwException('Event not found.');
             }
             Mage::getModel('iways_paypalplus/webhook_event')->processWebhookRequest($webhookEvent);
