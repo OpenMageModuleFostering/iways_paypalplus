@@ -197,12 +197,14 @@ class Iways_PayPalPlus_Model_Api
             $payment = Payment::get(Mage::getSingleton('customer/session')->getPayPalPaymentId(), $this->_apiContext);
             $patchRequest = new PatchRequest();
 
-            $shippingAddress = $this->buildShippingAddress($quote);
-            $addressPatch = new Patch();
-            $addressPatch->setOp(self::PATCH_ADD);
-            $addressPatch->setPath('/transactions/0/item_list/shipping_address');
-            $addressPatch->setValue($shippingAddress);
-            $patchRequest->addPatch($addressPatch);
+            if(!$quote->isVirtual()) {
+                $shippingAddress = $this->buildShippingAddress($quote);
+                $addressPatch = new Patch();
+                $addressPatch->setOp(self::PATCH_ADD);
+                $addressPatch->setPath('/transactions/0/item_list/shipping_address');
+                $addressPatch->setValue($shippingAddress);
+                $patchRequest->addPatch($addressPatch);
+            }
 
             $payerInfo = $this->buildBillingAddress($quote);
             $payerInfoPatch = new Patch();
