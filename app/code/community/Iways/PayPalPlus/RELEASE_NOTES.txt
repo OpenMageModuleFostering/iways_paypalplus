@@ -1,3 +1,6 @@
+==== 1.7.3 ====
+Added PUI legal text
+
 ==== 1.7.2 ====
 Changed Handling of Partner ID
 
