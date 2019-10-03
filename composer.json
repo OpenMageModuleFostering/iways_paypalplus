@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/Iways_PayPalPlus",
+    "name": "OpenMageModuleFostering\/Iways_PayPalPlus",
     "type": "magento-module",
     "license": "Open-Software-License-(OSL-3.0)",
     "homepage": "",
     "description": "PayPal PLUS is a solution where PayPal offers PayPal, Credit Card and ELV (pay upon invoice will be added in a later phase) as individual payment options on the payment selection page.",
     "authors": [
-    {
-        "name": "i-ways sales solutions GmbH",
-        "email": "magento@i-ways.de"
-    }
-],
+        {
+            "name": "i-ways sales solutions GmbH",
+            "email": "magento@i-ways.de"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
